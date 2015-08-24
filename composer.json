@@ -1,0 +1,13 @@
+{
+    "require": {
+        "tracy/tracy": "~2.0"
+    },
+    "require-dev": {
+        "nette/tester": "@dev"
+    },
+     "autoload": {
+        "psr-4": {
+            "IceMan\\": "src/"
+        }
+    }
+}
