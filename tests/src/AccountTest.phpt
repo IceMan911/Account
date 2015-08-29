@@ -4,7 +4,7 @@ namespace IceMan;
 
 use Tester\Assert;
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 /**
  * @author David Novak
