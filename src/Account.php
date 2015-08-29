@@ -38,10 +38,8 @@ class Account implements IAccount
      */
     public function selectMoney($amount) 
     {
-        if ($this->isAmountPositive($amount)) {
-            if ($this->isMoney($amount)) {
+        if ($this->isAmountPositive($amount) && $this->isMoney($amount)) {
                 $this->balances -= $amount;
-            }
         }
     }
 
@@ -60,14 +58,10 @@ class Account implements IAccount
      */
     private function isMoney($amount) 
     {
-        $boolean = TRUE;
-        if ($this->balances > 0 && $this->balances >= $amount) {
-            
-        } else {
-            $boolean = FALSE;
+        if (!($this->balances > 0 && $this->balances >= $amount)) {
             throw new AccountException('Amount can not select');
-        }
-        return $boolean;
+        } 
+        return TRUE;
     }
 
     /**
@@ -77,14 +71,10 @@ class Account implements IAccount
      */
     private function isAmountPositive($amount) 
     {
-        $boolean = TRUE;
-        if ($amount > 0) {
-            
-        } else {
-            $boolean = FALSE;
+        if (!($amount > 0)) {
             throw new AccountException('Amount must be positive');
-        }
-        return $boolean;
+        } 
+        return TRUE;
     }
 
 }
