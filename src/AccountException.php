@@ -1,13 +1,12 @@
 <?php
 
-/**
- * @author David Novak
- */
-
 namespace IceMan;
 
 use RuntimeException;
 
+/**
+ * @author David Novak
+ */
 class AccountException extends RuntimeException 
 {
     

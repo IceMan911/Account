@@ -1,21 +1,19 @@
 <?php
 
+namespace IceMan;
+
 /**
  * @author David Novak
  */
-
-namespace IceMan;
-
-interface IAccount {
+interface IAccount 
+{
 
     /**
-     * 
      * @param float $amount 
      */
     public function insertMoney($amount);
 
     /**
-     * 
      * @param float $amount 
      */
     public function selectMoney($amount);

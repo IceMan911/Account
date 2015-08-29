@@ -1,12 +1,12 @@
 <?php
 
+namespace IceMan;
+
 /**
  * @author David Novak 
  */
-
-namespace IceMan;
-
-class Account implements IAccount {
+class Account implements IAccount 
+{
 
     /** @var string */
     private $owner;
@@ -24,20 +24,20 @@ class Account implements IAccount {
     }
 
     /**
-     * 
      * @param float $amount
      */
-    public function insertMoney($amount) {
+    public function insertMoney($amount) 
+    {
         if ($this->isAmountPositive($amount)) {
             $this->balances += $amount;
         }
     }
 
     /**
-     * 
      * @param float $amount
      */
-    public function selectMoney($amount) {
+    public function selectMoney($amount) 
+    {
         if ($this->isAmountPositive($amount)) {
             if ($this->isMoney($amount)) {
                 $this->balances -= $amount;
@@ -46,37 +46,37 @@ class Account implements IAccount {
     }
 
     /**
-     * 
      * @return float
      */
-    public function getBalances() {
+    public function getBalances() 
+    {
         return $this->balances;
     }
 
     /**
-     * 
      * @param float $amount
-     * @return boolean
-     * @throws AcountException
+     * @return bool
+     * @throws AccountException
      */
-    private function isMoney($amount) {
+    private function isMoney($amount) 
+    {
         $boolean = TRUE;
         if ($this->balances > 0 && $this->balances >= $amount) {
             
         } else {
             $boolean = FALSE;
-            throw new AccountException('Amount can not select ');
+            throw new AccountException('Amount can not select');
         }
         return $boolean;
     }
 
     /**
-     * 
      * @param float $amount
-     * @return boolean
-     * @throws AmountException
+     * @return bool
+     * @throws AccountException
      */
-    private function isAmountPositive($amount) {
+    private function isAmountPositive($amount) 
+    {
         $boolean = TRUE;
         if ($amount > 0) {
             
