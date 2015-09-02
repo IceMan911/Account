@@ -3,9 +3,9 @@
 namespace IceMan;
 
 /**
- * @author David Novak 
+ * @author David Novak
  */
-class Account implements IAccount 
+class Account implements IAccount
 {
 
     /** @var string */
@@ -17,7 +17,8 @@ class Account implements IAccount
     /** @var float */
     private $balances;
 
-    public function __construct($owner, $number, $balances) {
+    public function __construct($owner, $number, $balances)
+    {
         $this->owner = $owner;
         $this->numberAccount = $number;
         $this->balances = $balances;
@@ -26,7 +27,7 @@ class Account implements IAccount
     /**
      * @param float $amount
      */
-    public function insertMoney($amount) 
+    public function insertMoney($amount)
     {
         if ($this->isAmountPositive($amount)) {
             $this->balances += $amount;
@@ -36,17 +37,17 @@ class Account implements IAccount
     /**
      * @param float $amount
      */
-    public function selectMoney($amount) 
+    public function selectMoney($amount)
     {
         if ($this->isAmountPositive($amount) && $this->isMoney($amount)) {
-                $this->balances -= $amount;
+            $this->balances -= $amount;
         }
     }
 
     /**
      * @return float
      */
-    public function getBalances() 
+    public function getBalances()
     {
         return $this->balances;
     }
@@ -56,11 +57,11 @@ class Account implements IAccount
      * @return bool
      * @throws AccountException
      */
-    private function isMoney($amount) 
+    private function isMoney($amount)
     {
-        if (!($this->balances > 0 && $this->balances >= $amount)) {
+        if ($this->balances <= 0 && $this->balances <= $amount) {
             throw new AccountException('Amount can not select');
-        } 
+        }
         return TRUE;
     }
 
@@ -69,11 +70,11 @@ class Account implements IAccount
      * @return bool
      * @throws AccountException
      */
-    private function isAmountPositive($amount) 
+    private function isAmountPositive($amount)
     {
-        if (!($amount > 0)) {
+        if ($amount <= 0) {
             throw new AccountException('Amount must be positive');
-        } 
+        }
         return TRUE;
     }
 
