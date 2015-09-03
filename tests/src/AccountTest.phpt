@@ -9,47 +9,46 @@ require __DIR__ . '/../bootstrap.php';
 /**
  * @author David Novak
  */
-class AccountTest extends \Tester\TestCase 
+class AccountTest extends \Tester\TestCase
 {
 
     /** @var Account */
     public $account;
 
-    public function testInsert() 
+    public function testInsert()
     {
-        $this->account = new Account('David Novak', 123456789, 0.0);
+        $this->account = new Account('David Novak', 123456789, 1000);
 
         $this->account->insertMoney(100.0);
-        Assert::equal(100.0, $this->account->getBalances());
+        Assert::equal(1100.0, $this->account->getBalance());
     }
 
-    public function testSelect() 
+    public function testSelect()
     {
         $this->account = new Account('David Novak', 123456789, 5000.0);
 
         $this->account->selectMoney(100.0);
-        Assert::equal(4900.0, $this->account->getBalances());
+        Assert::equal(4900.0, $this->account->getBalance());
     }
 
-//    /**
-//     * @throws AccountException
-//     */
-//    public function testInsertOnException() {
-//        $banka = new Account('David Novak', 123456, 5000);
-//
-//        $banka->insertMoney(-100);  // Amount must be positive
-//        Assert::equal(5000, $banka->getBalances());
-//    }
-//
-//    /**
-//     * @throws AccountException
-//     */
-//    public function testSelectOnException() {
-//        $banka = new Account('David Novak', 123456, -5);
-//
-//        $banka->selectMoney(5100);  // Amount can not select 
-//        Assert::equal(5000, $banka->getBalances());
-//    }
+    public function testInsertException()
+    {
+        $this->account = new Account('David Novak', 123456, 5000);
+
+        Assert::exception(function() {
+            $this->account->insertMoney(-200);
+        }, 'IceMan\AccountException', 'Amount must be positive');
+    }
+
+    public function testSelectException()
+    {
+        $this->account = new Account('David Novak', 123456, 500);
+
+        Assert::exception(function() {
+            $this->account->selectMoney(600);
+        }, 'IceMan\AccountException', 'Amount must be higher or equal than balance');
+    }
+
 }
 
 (new AccountTest())->run();
