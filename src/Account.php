@@ -15,13 +15,16 @@ class Account implements IAccount
     private $numberAccount;
 
     /** @var float */
-    private $balances;
+    private $balance;
 
-    public function __construct($owner, $number, $balances)
+    public function __construct($owner, $number, $balance)
     {
         $this->owner = $owner;
         $this->numberAccount = $number;
-        $this->balances = $balances;
+
+        if ($this->isAmountPositive($balance)) {
+            $this->balance = $balance;
+        }
     }
 
     /**
@@ -30,7 +33,7 @@ class Account implements IAccount
     public function insertMoney($amount)
     {
         if ($this->isAmountPositive($amount)) {
-            $this->balances += $amount;
+            $this->balance += $amount;
         }
     }
 
@@ -40,16 +43,16 @@ class Account implements IAccount
     public function selectMoney($amount)
     {
         if ($this->isAmountPositive($amount) && $this->isMoney($amount)) {
-            $this->balances -= $amount;
+            $this->balance -= $amount;
         }
     }
 
     /**
      * @return float
      */
-    public function getBalances()
+    public function getBalance()
     {
-        return $this->balances;
+        return $this->balance;
     }
 
     /**
@@ -59,8 +62,8 @@ class Account implements IAccount
      */
     private function isMoney($amount)
     {
-        if ($this->balances <= 0 && $this->balances <= $amount) {
-            throw new AccountException('Amount can not select');
+        if ($this->balance <= $amount) {
+            throw new AccountException('Amount must be higher or equal than balance');
         }
         return TRUE;
     }
