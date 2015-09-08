@@ -17,14 +17,18 @@ class Account implements IAccount
     /** @var float */
     private $balance;
 
+    /**
+     * @param string $owner
+     * @param float $number
+     * @param float $balance
+     * @throws AccountException 
+     */ 
     public function __construct($owner, $number, $balance)
     {
+        $this->isAmountPositive($balance);
         $this->owner = $owner;
         $this->numberAccount = $number;
-
-        if ($this->isAmountPositive($balance)) {
-            $this->balance = $balance;
-        }
+        $this->balance = $balance;
     }
 
     /**

@@ -49,6 +49,13 @@ class AccountTest extends \Tester\TestCase
         }, 'IceMan\AccountException', 'Amount must be higher or equal than balance');
     }
 
+    /**
+     * @throws \IceMan\AccountException
+     */
+    public function testInitException()
+    {
+        new Account('David', 123456, -1);
+    }
 }
 
 (new AccountTest())->run();
