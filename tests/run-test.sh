@@ -1,5 +1,8 @@
 #!/bin/sh
 
-./../vendor/bin/tester -p php -c php.ini
+DIR=`pwd`/`dirname $0`
 
-exit 0
+cd $DIR/..
+composer install
+
+$DIR/../vendor/bin/tester -p php -c "$DIR/php.ini" "$DIR/src"
